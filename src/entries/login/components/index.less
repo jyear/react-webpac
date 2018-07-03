@@ -1,9 +1,38 @@
 .login {
 	height: 100%;
+	background: #f8f8f8;
+	position: relative;
+	.login-bg {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+	}
 	.login-container {
-		width: 500px;
-		height: 400px;
+		position: relative;
+		z-index: 8;
+		width: 400px;
 		border-radius: 4px;
-		background: #fff;
+		background: rgba(219, 210, 210, 0.7);
+		padding: 30px 0 30px 0;
+		.title {
+			font-size: 24px;
+			font-weight: 600;
+			margin-bottom: 20px;
+		}
+		.login-item {
+			width: 300px;
+			margin: 10px 0;
+		}
+		.login-button {
+			width: 300px;
+			text-align: center;
+			margin-top: 20px;
+		}
+		.login-btn {
+			width: 100%;
+		}
 	}
 }

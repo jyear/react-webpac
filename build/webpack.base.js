@@ -10,9 +10,9 @@ var webpackConfig = {
 	resolve: {
 		extensions: [".js", ".json", ".jsx", ".less", ".css"],
 		alias: {
-			"#": path.resolve(rootPath, "assets/images"),
-			"!": path.resolve(rootPath, "assets/js"),
-			"@": path.resolve(rootPath, "assets/css")
+			"@img": path.resolve(rootPath, "./assets/images"),
+			"@js": path.resolve(rootPath, "./assets/js"),
+			"@css": path.resolve(rootPath, "./assets/css")
 		}
 	},
 	externals: {
