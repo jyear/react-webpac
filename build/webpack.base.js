@@ -8,7 +8,12 @@ entries.app = path.resolve(rootPath, "index.js");
 var webpackConfig = {
 	entry: entries,
 	resolve: {
-		extensions: [".js", ".json", ".jsx", ".less", ".css"]
+		extensions: [".js", ".json", ".jsx", ".less", ".css"],
+		alias: {
+			"#": path.resolve(rootPath, "assets/images"),
+			"!": path.resolve(rootPath, "assets/js"),
+			"@": path.resolve(rootPath, "assets/css")
+		}
 	},
 	externals: {
 		React: "react",

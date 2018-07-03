@@ -1,12 +1,12 @@
 import React from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 
-import Home from "./entries/home";
+import Login from "./entries/login";
 
 export default () => {
 	return (
 		<Switch>
-			<Route path="/" exact component={Home} />
+			<Route path="/" exact component={Login} />
 		</Switch>
 	);
 };
