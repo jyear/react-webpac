@@ -6,7 +6,7 @@
 	"scripts": {
 		"compile": "webpack --config webpack.dll.config.js",
 		"dev": "cross-env NODE_ENV=development webpack-dev-server --progress",
-		"build": "cross-env NODE_ENV=production webpack --progress"
+		"build": "webpack --config webpack.dll.config.js&&cross-env NODE_ENV=production webpack --progress"
 	},
 	"author": "",
 	"license": "ISC",

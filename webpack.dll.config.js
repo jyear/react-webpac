@@ -3,6 +3,7 @@ const fs = require("fs");
 const webpack = require("webpack");
 var rootPath = path.join(__dirname, "./app/src");
 var webpackDll = {
+	mode: "production",
 	resolve: {
 		extensions: [".js", ".jsx"]
 	},
@@ -17,6 +18,7 @@ var webpackDll = {
 			"react-router-redux"
 		]
 	},
+	devtool: false,
 	output: {
 		path: path.join(__dirname, "/dist/mainfest/"),
 		filename: "[name].dll.js",
@@ -37,7 +39,7 @@ var webpackDll = {
 
 			{
 				test: /\.js|ts|tsx$/,
-				use: ["babel-loader", "ts-loader"],
+				use: ["babel-loader"],
 				include: rootPath
 			},
 			{
