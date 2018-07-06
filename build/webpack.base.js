@@ -31,12 +31,28 @@ var webpackConfig = {
 				}
 			},
 			{
-				test: /\.js|tsx|ts$/,
+				test: /\.js|jsx$/,
 				use: ["babel-loader"],
 				include: rootPath
 			},
 			{
+				//antd样式处理
+				test: /\.css$/,
+				exclude: /src/,
+				use: [
+					{ loader: "style-loader" },
+					{
+						loader: "css-loader",
+						options: {
+							importLoaders: 1
+						}
+					}
+				]
+			},
+
+			{
 				test: /\.css|less$/,
+				exclude: /node_modules/,
 				use: ExtractTextPlugin.extract({
 					fallback: "style-loader",
 					use: ["css-loader", "postcss-loader", "less-loader"]

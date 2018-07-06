@@ -1,6 +1,7 @@
 const webpack = require("webpack");
 const config = require("../config");
 const insertHTML = require("./insertHtml");
+const path = require("path");
 var webpackProConfig = {
 	mode: "production",
 	output: {
@@ -16,22 +17,13 @@ var webpackProConfig = {
 			content: '<script src="./mainfest/vendor.dll.js"></script>'
 		}),
 		new webpack.DllReferencePlugin({
-			manifest: require("../dist/mainfest/vendor-mainfest.json")
+			context: __dirname,
+			manifest: require(path.join(
+				__dirname,
+				"../dist/mainfest/mainfest.json"
+			)), //通过require引入manifest.json文件
+			name: "vendor" //引入dll文件的变量名
 		})
-	],
-	optimization: {
-		runtimeChunk: {
-			name: "manifest"
-		},
-		splitChunks: {
-			cacheGroups: {
-				commons: {
-					test: /[\\/]node_modules[\\/]/,
-					name: "vendor",
-					chunks: "all"
-				}
-			}
-		}
-	}
+	]
 };
 module.exports = webpackProConfig;

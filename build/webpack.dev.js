@@ -19,17 +19,6 @@ var webpackDevConfig = {
 		chunkFilename: "assets/js/[name].js",
 		sourceMapFilename: "[file].map"
 	},
-	plugins: [new webpack.HotModuleReplacementPlugin()],
-	optimization: {
-		splitChunks: {
-			cacheGroups: {
-				commons: {
-					test: /[\\/]node_modules[\\/]/,
-					name: "vendor",
-					chunks: "all"
-				}
-			}
-		}
-	}
+	plugins: [new webpack.HotModuleReplacementPlugin()]
 };
 module.exports = webpackDevConfig;

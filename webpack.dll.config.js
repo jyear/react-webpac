@@ -81,8 +81,7 @@ var webpackDll = {
 	},
 	plugins: [
 		new webpack.DllPlugin({
-			path: path.join(__dirname, "dist/mainfest", "[name]-mainfest.json"),
-			name: "[name]_library"
+			path: path.join(__dirname, "dist/mainfest", "mainfest.json")
 		})
 	]
 };
