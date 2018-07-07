@@ -2,14 +2,17 @@ function insertHtml(options) {
 	this.options = options;
 }
 insertHtml.prototype.apply = function(compiler) {
-	var content = this.options.content;
+	var src = this.options.src;
+	var hasHash = this.options.hash;
 	compiler.plugin("compilation", function(compilation, options) {
 		compilation.plugin(
 			"html-webpack-plugin-before-html-processing",
 			function(htmlPluginData, callback) {
 				htmlPluginData.html = htmlPluginData.html.replace(
 					"</body>",
-					content + "</body>"
+					`<script src="${src}${
+						hasHash ? "?" + compilation.hash : ""
+					}"></script></body>`
 				);
 			}
 		);

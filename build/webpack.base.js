@@ -89,9 +89,10 @@ var webpackConfig = {
 			template: path.resolve(rootPath, "../public/index.html"),
 			minify: {
 				collapseWhitespace: true //折叠空白区域 也就是压缩代码
-			}
+			},
+			hash: true
 		}),
-		new ExtractTextPlugin("assets/css/[name]_[hash].css")
+		new ExtractTextPlugin("assets/css/[name]_[chunkhash:9].css")
 	]
 };
 module.exports = webpackConfig;

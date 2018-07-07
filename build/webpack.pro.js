@@ -3,7 +3,7 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
 	.BundleAnalyzerPlugin;
 const config = require("../config");
-const insertHTML = require("./insertHtml");
+const insertScript = require("./insertScript");
 const path = require("path");
 var webpackProConfig = {
 	mode: "production",
@@ -16,8 +16,9 @@ var webpackProConfig = {
 	},
 	devtool: "source-map",
 	plugins: [
-		new insertHTML({
-			content: '<script src="./manifest/manifest.dll.js"></script>'
+		new insertScript({
+			src: `./manifest/manifest.dll.js`,
+			hash: true
 		}),
 		new webpack.DllReferencePlugin({
 			context: path.join(__dirname, "../src"),
@@ -29,8 +30,6 @@ var webpackProConfig = {
 				NODE_ENV: JSON.stringify(process.env.NODE_ENV)
 			}
 		})
-
-		//new ModuleConcatenationPlugin()
 	],
 	optimization: {
 		minimize: true,
@@ -41,23 +40,22 @@ var webpackProConfig = {
 		flagIncludedChunks: true,
 		nodeEnv: "production",
 		splitChunks: {
+			chunks: "async",
+			name: "vendors",
 			cacheGroups: {
 				commons: {
 					chunks: "initial",
 					minChunks: 2,
 					maxInitialRequests: 5, // The default limit is too small to showcase the effect
-					minSize: 0 // This is example is too small to create commons chunks
+					minSize: 0, // This is example is too small to create commons chunks
+					reuseExistingChunk: true
 				},
-				vendor: {
+				vendors: {
 					test: /[\\/]node_modules[\\/]/,
-					name: "vendors",
 					priority: -20,
 					chunks: "all"
 				}
 			}
-		},
-		runtimeChunk: {
-			name: "app"
 		}
 	}
 };

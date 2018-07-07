@@ -33,7 +33,7 @@ var webpackDll = {
 		new webpack.DllPlugin({
 			path: path.join(__dirname, "dist/manifest", "manifest.json"),
 			context: path.join(__dirname, "./src"),
-			name: "manifest"
+			name: "manifest_[hash]"
 		})
 	]
 };
