@@ -48,7 +48,7 @@ var webpackProConfig = {
 		nodeEnv: "production",
 		splitChunks: {
 			chunks: "async",
-			name: "vendors",
+			filename: "assets/js/vendors.[chunkhash:9].js",
 			cacheGroups: {
 				commons: {
 					chunks: "initial",
