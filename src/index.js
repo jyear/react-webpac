@@ -8,7 +8,6 @@ import { render as domRender } from "react-dom";
 import Routes from "./routes";
 import registerServiceWorker from "./registerServiceWorker";
 import "./assets/css/base.less";
-// import "antd/dist/antd.less";
 import "./assets/css/common.less";
 
 const store = storeFun();
