@@ -2,7 +2,7 @@ module.exports = {
 	stripPrefix: "dist/",
 	staticFileGlobs: [
 		"dist/manifest/manifest.json",
-		"dist/manifest/manifest.dll.js",
+		"dist/manifest/manifest.*.dll.js",
 		"dist/assets/**/!(*map*)"
 	],
 	dontCacheBustUrlsMatching: /\.\w{8}\./,
