@@ -18,7 +18,7 @@ var webpackProConfig = {
 	plugins: [
 		new insertScript({
 			src: `./manifest/manifest.dll.js`,
-			hash: true
+			hash: false
 		}),
 		new webpack.DllReferencePlugin({
 			context: path.join(__dirname, "../src"),

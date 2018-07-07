@@ -90,7 +90,7 @@ var webpackConfig = {
 			minify: {
 				collapseWhitespace: true //折叠空白区域 也就是压缩代码
 			},
-			hash: true
+			hash: false
 		}),
 		new ExtractTextPlugin("assets/css/[name]_[chunkhash:9].css")
 	]
