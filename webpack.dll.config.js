@@ -1,6 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const webpack = require("webpack");
+
 var rootPath = path.join(__dirname, "./app/src");
 var webpackDll = {
 	mode: "production",
@@ -8,82 +9,31 @@ var webpackDll = {
 		extensions: [".js", ".jsx"]
 	},
 	entry: {
-		vendor: [
+		manifest: [
 			"babel-polyfill",
 			"react",
+			"react-dom",
 			"react-router-dom",
 			"redux",
 			"react-redux",
 			"redux-actions",
-			"react-router-redux"
+			"react-router-redux",
+			"whatwg-fetch"
 		]
-	},
-	devtool: false,
-	output: {
-		path: path.join(__dirname, "/dist/mainfest/"),
-		filename: "[name].dll.js",
-		library: "[name]_library"
 	},
 	module: {
-		strictExportPresence: true,
-		rules: [
-			{
-				test: /\.css|less$/,
-				use: [
-					"style-loader",
-					"css-loader",
-					"postcss-loader",
-					"less-loader"
-				]
-			},
-
-			{
-				test: /\.js|ts|tsx$/,
-				use: ["babel-loader"],
-				include: rootPath
-			},
-			{
-				test: /\.(js|jsx|mjs)$/,
-				include: /node_modules/,
-				loader: "babel-loader",
-				options: {
-					cacheDirectory: true,
-					plugins: [
-						["react-html-attrs"],
-						["import", { libraryName: "antd", style: "css" }],
-						["import", { libraryName: "antd", style: true }]
-					]
-				}
-			},
-			{
-				test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-				use: [
-					{
-						loader: "url-loader",
-						options: {
-							limit: 10000,
-							name: "assets/img/[name].[hash:9].[ext]"
-						}
-					}
-				]
-			},
-			{
-				test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-				use: [
-					{
-						loader: "url-loader",
-						options: {
-							limit: 10000,
-							name: "assets/font/[name].[hash:9].[ext]"
-						}
-					}
-				]
-			}
-		]
+		strictExportPresence: true
+	},
+	output: {
+		path: path.join(__dirname, "/dist/manifest/"),
+		filename: "[name].dll.js",
+		library: "manifest"
 	},
 	plugins: [
 		new webpack.DllPlugin({
-			path: path.join(__dirname, "dist/mainfest", "mainfest.json")
+			path: path.join(__dirname, "dist/manifest", "manifest.json"),
+			context: path.join(__dirname, "./src"),
+			name: "manifest"
 		})
 	]
 };

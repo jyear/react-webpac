@@ -86,9 +86,12 @@ var webpackConfig = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: path.resolve(rootPath, "../public/index.html")
+			template: path.resolve(rootPath, "../public/index.html"),
+			minify: {
+				collapseWhitespace: true //折叠空白区域 也就是压缩代码
+			}
 		}),
-		new ExtractTextPlugin("assets/css/[name].css")
+		new ExtractTextPlugin("assets/css/[name]_[hash].css")
 	]
 };
 module.exports = webpackConfig;

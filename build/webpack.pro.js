@@ -1,4 +1,7 @@
 const webpack = require("webpack");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+	.BundleAnalyzerPlugin;
 const config = require("../config");
 const insertHTML = require("./insertHtml");
 const path = require("path");
@@ -14,16 +17,48 @@ var webpackProConfig = {
 	devtool: "source-map",
 	plugins: [
 		new insertHTML({
-			content: '<script src="./mainfest/vendor.dll.js"></script>'
+			content: '<script src="./manifest/manifest.dll.js"></script>'
 		}),
 		new webpack.DllReferencePlugin({
-			context: __dirname,
-			manifest: require(path.join(
-				__dirname,
-				"../dist/mainfest/mainfest.json"
-			)), //通过require引入manifest.json文件
-			name: "vendor" //引入dll文件的变量名
+			context: path.join(__dirname, "../src"),
+			manifest: require("../dist/manifest/manifest.json"),
+			name: "manifest"
+		}),
+		new webpack.DefinePlugin({
+			"process.env": {
+				NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+			}
 		})
-	]
+
+		//new ModuleConcatenationPlugin()
+	],
+	optimization: {
+		minimize: true,
+		usedExports: true,
+		providedExports: true,
+		concatenateModules: true,
+		mangleWasmImports: true,
+		flagIncludedChunks: true,
+		nodeEnv: "production",
+		splitChunks: {
+			cacheGroups: {
+				commons: {
+					chunks: "initial",
+					minChunks: 2,
+					maxInitialRequests: 5, // The default limit is too small to showcase the effect
+					minSize: 0 // This is example is too small to create commons chunks
+				},
+				vendor: {
+					test: /[\\/]node_modules[\\/]/,
+					name: "vendors",
+					priority: -20,
+					chunks: "all"
+				}
+			}
+		},
+		runtimeChunk: {
+			name: "app"
+		}
+	}
 };
 module.exports = webpackProConfig;
