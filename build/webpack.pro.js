@@ -7,7 +7,7 @@ const insertScript = require("./insertScript");
 const path = require("path");
 const glob = require("glob");
 const getDll = function() {
-	var dll = glob.sync(path.join(__dirname, "../dist/manifest/*.js"));
+	var dll = glob.sync(path.join(__dirname, "../dist/manifest/*.dll.js"));
 	dll = dll[0];
 	return dll.substr(dll.lastIndexOf("/") + 1, dll.length);
 };
