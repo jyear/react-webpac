@@ -92,6 +92,7 @@ var webpackConfig = {
 			},
 			hash: false
 		}),
+		//单独提出css
 		new ExtractTextPlugin("assets/css/[name]_[chunkhash:9].css")
 	]
 };

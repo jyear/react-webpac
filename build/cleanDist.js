@@ -1,3 +1,4 @@
+//webpack clean插件不好用 ，so 用node 直接删除文件 node命令直接执行
 const path = require("path");
 const fs = require("fs");
 function deleteFolder(path) {
