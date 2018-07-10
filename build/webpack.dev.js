@@ -1,7 +1,7 @@
 const webpack = require("webpack");
 const config = require("../config");
 const path = require("path");
-const insertHTML = require("./insertHtml");
+
 var webpackDevConfig = {
 	mode: "development",
 	devtool: "cheap-module-eval-source-map",
